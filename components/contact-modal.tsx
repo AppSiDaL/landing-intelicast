@@ -15,8 +15,9 @@ import {
   CheckCircle2,
   User,
   Briefcase,
-  MapPin,
+  Building2,
   ExternalLink,
+  MessageCircle, // Added for WhatsApp icon
 } from "lucide-react";
 import { useState } from "react";
 import { motion } from "framer-motion";
@@ -32,11 +33,10 @@ export default function ContactModal({
 }: ContactModalProps) {
   const [copiedPhone, setCopiedPhone] = useState(false);
   const [copiedEmail1, setCopiedEmail1] = useState(false);
-  const [copiedEmail2, setCopiedEmail2] = useState(false);
 
   const copyToClipboard = async (
     text: string,
-    type: "phone" | "email1" | "email2"
+    type: "phone" | "email1"
   ) => {
     await navigator.clipboard.writeText(text);
     if (type === "phone") {
@@ -45,9 +45,6 @@ export default function ContactModal({
     } else if (type === "email1") {
       setCopiedEmail1(true);
       setTimeout(() => setCopiedEmail1(false), 2000);
-    } else {
-      setCopiedEmail2(true);
-      setTimeout(() => setCopiedEmail2(false), 2000);
     }
   };
 
@@ -87,7 +84,7 @@ export default function ContactModal({
         >
           {/* Profile Card */}
           <motion.div
-            className="p-6 rounded-xl bg-gradient-to-br from-primary/10 to-accent/10 border border-primary/20"
+            className="p-6 rounded-xl bg-linear-to-br from-primary/10 to-accent/10 border border-primary/20"
             variants={itemVariants}
           >
             <div className="flex items-start gap-4">
@@ -103,8 +100,8 @@ export default function ContactModal({
                   <span>Presidente</span>
                 </div>
                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <MapPin className="h-4 w-4" />
-                  <span>Intelicast</span>
+                  <Building2 className="h-4 w-4" />
+                  <span>Intelite</span>
                 </div>
               </div>
             </div>
@@ -150,19 +147,19 @@ export default function ContactModal({
               <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
                 <Mail className="h-4 w-4 text-primary" />
               </div>
-              <span>Correos Electrónicos</span>
+              <span>Correo Electrónico</span>
             </div>
 
             <div className="flex items-center gap-2">
               <motion.a
-                href="mailto:rodolfo.sandoval@intelicast.net"
+                href="mailto:rsm@oblekco.com"
                 className="flex-1 p-4 rounded-lg bg-muted hover:bg-muted/70 transition-colors border border-border/50 group"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
                 <div className="flex items-center justify-between">
                   <p className="text-sm font-mono text-primary break-all">
-                    rodolfo.sandoval@intelicast.net
+                    rsm@oblekco.com
                   </p>
                   <ExternalLink className="h-4 w-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity shrink-0 ml-2" />
                 </div>
@@ -170,42 +167,10 @@ export default function ContactModal({
               <Button
                 size="icon"
                 variant="outline"
-                onClick={() =>
-                  copyToClipboard("rodolfo.sandoval@intelicast.net", "email1")
-                }
+                onClick={() => copyToClipboard("rsm@oblekco.com", "email1")}
                 className="h-12 w-12"
               >
                 {copiedEmail1 ? (
-                  <CheckCircle2 className="h-5 w-5 text-green-500" />
-                ) : (
-                  <Copy className="h-5 w-5" />
-                )}
-              </Button>
-            </div>
-
-            <div className="flex items-center gap-2">
-              <motion.a
-                href="mailto:rodolfosandovalmonroy@gmail.com"
-                className="flex-1 p-4 rounded-lg bg-muted hover:bg-muted/70 transition-colors border border-border/50 group"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <div className="flex items-center justify-between">
-                  <p className="text-sm font-mono text-primary break-all">
-                    rodolfosandovalmonroy@gmail.com
-                  </p>
-                  <ExternalLink className="h-4 w-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity shrink-0 ml-2" />
-                </div>
-              </motion.a>
-              <Button
-                size="icon"
-                variant="outline"
-                onClick={() =>
-                  copyToClipboard("rodolfosandovalmonroy@gmail.com", "email2")
-                }
-                className="h-12 w-12"
-              >
-                {copiedEmail2 ? (
                   <CheckCircle2 className="h-5 w-5 text-green-500" />
                 ) : (
                   <Copy className="h-5 w-5" />
@@ -227,9 +192,19 @@ export default function ContactModal({
               variant="outline"
               asChild
             >
-              <a href="mailto:rodolfo.sandoval@intelicast.net">
+              <a href="mailto:rsm@oblekco.com">
                 <Mail className="h-5 w-5" />
                 Enviar Email
+              </a>
+            </Button>
+            <Button className="flex-1 gap-2 h-12 bg-green-500 hover:bg-green-600 text-white" asChild>
+              <a
+                href="https://wa.me/525551075025"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <MessageCircle className="h-5 w-5" />
+                WhatsApp
               </a>
             </Button>
           </motion.div>

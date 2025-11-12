@@ -11,6 +11,7 @@ export const metadata: Metadata = {
   title: "Intelicast - Catálogo de Servicios 2025",
   description:
     "Catálogo de servicios de inteligencia estratégica y análisis de medios",
+  icons: "/frame.png",
 };
 
 export default function RootLayout({

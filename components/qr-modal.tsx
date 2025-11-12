@@ -130,7 +130,7 @@ export default function QRModal({ open, onOpenChange }: QRModalProps) {
             animate={{ scale: 1, opacity: 1 }}
             transition={{ delay: 0.1, type: "spring", stiffness: 200 }}
           >
-            <div className="p-6 bg-gradient-to-br from-primary/5 to-accent/5 rounded-2xl shadow-xl border border-primary/20">
+            <div className="p-6 bg-linear-to-br from-primary/5 to-accent/5 rounded-2xl shadow-xl border border-primary/20">
               <div ref={qrRef} className="bg-white p-4 rounded-xl">
                 <QRCodeSVG
                   value={currentUrl}
@@ -141,7 +141,7 @@ export default function QRModal({ open, onOpenChange }: QRModalProps) {
                     src: "/frame.png",
                     x: undefined,
                     y: undefined,
-                    height: 40,
+                    height: 50,
                     width: 50,
                     excavate: true,
                   }}
