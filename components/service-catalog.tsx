@@ -366,8 +366,8 @@ export default function ServiceCatalog() {
               variants={fadeInUp}
             >
               Inteligencia estratégica para la toma de decisiones mediante
-              análisis especializado, monitoreo continuo y evaluación de
-              resultados.
+              análisis y evaluación de resultados, a través del monitoreo
+              continuo de medios de comunicación y redes sociales.
             </motion.p>
             <motion.div
               className="flex flex-wrap gap-4 justify-center pt-4"
