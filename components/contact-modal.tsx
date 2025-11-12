@@ -34,10 +34,7 @@ export default function ContactModal({
   const [copiedPhone, setCopiedPhone] = useState(false);
   const [copiedEmail1, setCopiedEmail1] = useState(false);
 
-  const copyToClipboard = async (
-    text: string,
-    type: "phone" | "email1"
-  ) => {
+  const copyToClipboard = async (text: string, type: "phone" | "email1") => {
     await navigator.clipboard.writeText(text);
     if (type === "phone") {
       setCopiedPhone(true);
@@ -108,21 +105,24 @@ export default function ContactModal({
           </motion.div>
 
           {/* Teléfono */}
-          <motion.div className="space-y-2 sm:space-y-3" variants={itemVariants}>
+          <motion.div
+            className="space-y-2 sm:space-y-3"
+            variants={itemVariants}
+          >
             <div className="flex items-center gap-2 text-xs sm:text-sm font-medium text-foreground">
               <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-primary/10 flex items-center justify-center">
                 <Phone className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-primary" />
               </div>
               <span>Teléfono</span>
             </div>
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+            <div className="flex items-center gap-2">
               <motion.a
                 href="tel:+525551075025"
                 className="flex-1 p-3 sm:p-4 rounded-lg bg-muted hover:bg-muted/70 transition-colors border border-border/50"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
-                <p className="text-base sm:text-lg font-mono text-primary font-semibold text-center sm:text-left">
+                <p className="text-base sm:text-lg font-mono text-primary font-semibold">
                   +52 55 5107 5025
                 </p>
               </motion.a>
@@ -130,20 +130,22 @@ export default function ContactModal({
                 size="icon"
                 variant="outline"
                 onClick={() => copyToClipboard("+525551075025", "phone")}
-                className="h-11 w-full sm:h-12 sm:w-12"
+                className="h-11 w-11 sm:h-12 sm:w-12 shrink-0"
               >
                 {copiedPhone ? (
                   <CheckCircle2 className="h-5 w-5 text-green-500" />
                 ) : (
                   <Copy className="h-5 w-5" />
                 )}
-                <span className="sm:hidden ml-2">Copiar teléfono</span>
               </Button>
             </div>
           </motion.div>
 
           {/* Emails */}
-          <motion.div className="space-y-2 sm:space-y-3" variants={itemVariants}>
+          <motion.div
+            className="space-y-2 sm:space-y-3"
+            variants={itemVariants}
+          >
             <div className="flex items-center gap-2 text-xs sm:text-sm font-medium text-foreground">
               <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-primary/10 flex items-center justify-center">
                 <Mail className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-primary" />
@@ -151,10 +153,10 @@ export default function ContactModal({
               <span>Correo Electrónico</span>
             </div>
 
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+            <div className="flex items-center gap-2">
               <motion.a
                 href="mailto:rsm@oblekco.com"
-                className="flex-1 p-3 sm:p-4 rounded-lg bg-muted hover:bg-muted/70 transition-colors border border-border/50 group"
+                className="flex-1 p-3 sm:p-4 rounded-lg bg-muted hover:bg-muted/70 transition-colors border border-border/50 group min-w-0"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
@@ -169,21 +171,39 @@ export default function ContactModal({
                 size="icon"
                 variant="outline"
                 onClick={() => copyToClipboard("rsm@oblekco.com", "email1")}
-                className="h-11 w-full sm:h-12 sm:w-12"
+                className="h-11 w-11 sm:h-12 sm:w-12 shrink-0"
               >
                 {copiedEmail1 ? (
                   <CheckCircle2 className="h-5 w-5 text-green-500" />
                 ) : (
                   <Copy className="h-5 w-5" />
                 )}
-                <span className="sm:hidden ml-2">Copiar email</span>
               </Button>
             </div>
           </motion.div>
 
           {/* Quick Actions */}
-          <motion.div className="pt-2 sm:pt-4 flex flex-col sm:flex-row gap-2" variants={itemVariants}>
-            <Button className="flex-1 gap-2 h-11 sm:h-12 text-sm sm:text-base" asChild>
+          <motion.div
+            className="pt-2 sm:pt-4 flex flex-col sm:flex-row gap-2"
+            variants={itemVariants}
+          >
+            <Button
+              className="flex-1 gap-2 h-11 sm:h-12 bg-green-500 hover:bg-green-600 text-white text-sm sm:text-base"
+              asChild
+            >
+              <a
+                href="https://wa.me/525551075025"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <MessageCircle className="h-4 w-4 sm:h-5 sm:w-5" />
+                WhatsApp
+              </a>
+            </Button>
+            <Button
+              className="flex-1 gap-2 h-11 sm:h-12 text-sm sm:text-base"
+              asChild
+            >
               <a href="tel:+525551075025">
                 <Phone className="h-4 w-4 sm:h-5 sm:w-5" />
                 Llamar Ahora
@@ -197,16 +217,6 @@ export default function ContactModal({
               <a href="mailto:rsm@oblekco.com">
                 <Mail className="h-4 w-4 sm:h-5 sm:w-5" />
                 Enviar Email
-              </a>
-            </Button>
-            <Button className="flex-1 gap-2 h-11 sm:h-12 bg-green-500 hover:bg-green-600 text-white text-sm sm:text-base" asChild>
-              <a
-                href="https://wa.me/525551075025"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <MessageCircle className="h-4 w-4 sm:h-5 sm:w-5" />
-                WhatsApp
               </a>
             </Button>
           </motion.div>
