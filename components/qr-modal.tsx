@@ -141,7 +141,7 @@ export default function QRModal({ open, onOpenChange }: QRModalProps) {
                     src: "/frame.png",
                     x: undefined,
                     y: undefined,
-                    height: 50,
+                    height: 45,
                     width: 50,
                     excavate: true,
                   }}
