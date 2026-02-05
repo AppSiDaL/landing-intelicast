@@ -21,9 +21,9 @@ export default function WhatsAppForm() {
     if (!name.trim()) return;
 
     let message = `Hola, soy ${name}`;
-    if (company.trim()) message += ` de ${company.trim()}`;
     if (position.trim()) message += ` ${position.trim()}`;
-    message += `, estoy interesado en recibir todos los días el Medio de Medios (https://www.elmediodemedios.com/)`;
+    if (company.trim()) message += ` de ${company.trim()}`;
+    message += `, estoy interesad@ en recibir todos los días el Medio de Medios (https://www.elmediodemedios.com/)`;
     const num = 525545641120;
 
     const whatsappUrl = `https://wa.me/${num}?text=${encodeURIComponent(
