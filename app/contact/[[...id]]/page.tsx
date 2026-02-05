@@ -90,8 +90,10 @@ export default function ContactPage() {
             >
               <motion.div variants={fadeInUp} className="text-center space-y-4">
                 <h1 className="text-4xl lg:text-5xl font-bold text-foreground text-balance">
-                  Hablemos de tu{" "}
-                  <span className="text-primary">Estrategia</span>
+                  ¿Te cuesta estar al día con los temas{" "}
+                  <span className="text-primary">
+                    políticos, financieros y tecnológicos?
+                  </span>
                 </h1>
                 <p className="text-lg text-muted-foreground text-pretty max-w-2xl mx-auto">
                   Completa el formulario para conectarte directamente con
