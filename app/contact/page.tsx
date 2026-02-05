@@ -22,7 +22,7 @@ export default function ContactPage() {
           <div className="flex h-16 items-center justify-between">
             <Link href="/" className="flex items-center gap-3">
               <Image
-                src="/mdm.png"
+                src="/mdm.svg"
                 alt="Intelicast"
                 width={50}
                 height={50}
