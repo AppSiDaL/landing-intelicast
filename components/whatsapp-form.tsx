@@ -11,22 +11,41 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-export default function WhatsAppForm() {
+export default function WhatsAppForm({ inviterId }: { inviterId?: string }) {
   const [name, setName] = useState("");
   const [company, setCompany] = useState("");
   const [position, setPosition] = useState("");
+
+  const inviters = [
+    {
+      id: "RSM",
+      name: "Rodolfo Sandoval Monroy",
+      number: "525551075025",
+    },
+    {
+      id: "CP",
+      name: "Cacho Peralta",
+      number: "525555038714",
+    },
+    {
+      id: "SCM",
+      name: "Sylví Cruz Monroy",
+      number: "525524966826",
+    },
+  ];
+
+  const inviter = inviters.find((i) => i.id === inviterId) || inviters[0];
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!name.trim()) return;
 
-    let message = `Hola, soy ${name}`;
+    let message = `Hola, soy ${name},`;
     if (position.trim()) message += ` ${position.trim()}`;
     if (company.trim()) message += ` de ${company.trim()}`;
-    message += `, estoy interesad@ en recibir todos los días el Medio de Medios (https://www.elmediodemedios.com/)`;
-    const num = 525551075025;
+    message += `, estoy interesad@ en recibir todos los días el Medio de Medios por cortesía de ${inviter.name} (https://www.elmediodemedios.com/publicaciones/agenda-nacional)`;
 
-    const whatsappUrl = `https://wa.me/${num}?text=${encodeURIComponent(
+    const whatsappUrl = `https://wa.me/${inviter.number}?text=${encodeURIComponent(
       message,
     )}`;
 

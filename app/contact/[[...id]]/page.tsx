@@ -5,9 +5,15 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { motion } from "framer-motion";
+import { useParams } from "next/navigation";
 import WhatsAppForm from "@/components/whatsapp-form";
 
 export default function ContactPage() {
+  const params = useParams();
+  // id is an array in an optional catch-all route [[...id]]
+  const idArray = params.id as string[];
+  const inviterId = idArray?.[0];
+
   // Animation variants
   const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
@@ -97,7 +103,7 @@ export default function ContactPage() {
                 variants={fadeInUp}
                 className="flex justify-center w-full"
               >
-                <WhatsAppForm />
+                <WhatsAppForm inviterId={inviterId} />
               </motion.div>
             </motion.div>
           </div>
