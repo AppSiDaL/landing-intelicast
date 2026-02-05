@@ -20,9 +20,10 @@ export default function WhatsAppForm() {
     if (!name.trim()) return;
 
     const message = `Hola, soy ${name} estoy interesado en el servicio`;
-    const whatsappUrl = `https://wa.me/525545641120?text=${encodeURIComponent(
+    const whatsappUrl = `https://wa.me/525551075025?text=${encodeURIComponent(
       message,
     )}`;
+    console.log(whatsappUrl);
 
     window.open(whatsappUrl, "_blank");
     setName("");
