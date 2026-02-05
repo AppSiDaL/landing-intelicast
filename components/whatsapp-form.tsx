@@ -13,18 +13,26 @@ import {
 
 export default function WhatsAppForm() {
   const [name, setName] = useState("");
+  const [company, setCompany] = useState("");
+  const [position, setPosition] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!name.trim()) return;
 
-    const message = `Hola, soy ${name} estoy interesado en el Medio de Medios (https://www.elmediodemedios.com/) y me gustaría recibirlo todos los días`;
+    let message = `Hola, soy ${name}`;
+    if (company.trim()) message += ` de ${company.trim()}`;
+    if (position.trim()) message += ` ${position.trim()}`;
+    message += `, estoy interesado en recibir todos los días el Medio de Medios (https://www.elmediodemedios.com/)`;
+
     const whatsappUrl = `https://wa.me/525551075025?text=${encodeURIComponent(
       message,
     )}`;
 
     window.open(whatsappUrl, "_blank");
     setName("");
+    setCompany("");
+    setPosition("");
   };
 
   return (
@@ -37,18 +45,18 @@ export default function WhatsAppForm() {
           Contacto Directo
         </CardTitle>
         <CardDescription className="text-base">
-          Ingresa tu nombre para iniciar un chat de WhatsApp con nuestro equipo.
+          Ingresa tus datos para iniciar un chat de WhatsApp con nuestro equipo.
         </CardDescription>
       </CardHeader>
 
       <CardContent>
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
             <label
               htmlFor="name"
               className="text-sm font-medium leading-none text-foreground/80"
             >
-              Nombre Completo
+              Nombre Completo <span className="text-red-500">*</span>
             </label>
             <input
               id="name"
@@ -62,10 +70,46 @@ export default function WhatsAppForm() {
             />
           </div>
 
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <label
+                htmlFor="company"
+                className="text-sm font-medium leading-none text-foreground/80"
+              >
+                Empresa
+              </label>
+              <input
+                id="company"
+                type="text"
+                value={company}
+                onChange={(e) => setCompany(e.target.value)}
+                placeholder="Ej: Acme Corp"
+                className="flex h-12 w-full rounded-xl border border-input bg-background/50 px-4 py-3 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 transition-all duration-200"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label
+                htmlFor="position"
+                className="text-sm font-medium leading-none text-foreground/80"
+              >
+                Puesto
+              </label>
+              <input
+                id="position"
+                type="text"
+                value={position}
+                onChange={(e) => setPosition(e.target.value)}
+                placeholder="Ej: Director"
+                className="flex h-12 w-full rounded-xl border border-input bg-background/50 px-4 py-3 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 transition-all duration-200"
+              />
+            </div>
+          </div>
+
           <Button
             type="submit"
             size="lg"
-            className="w-full gap-2 bg-[#25D366] hover:bg-[#128C7E] text-white border-none shadow-lg shadow-[#25D366]/20 hover:shadow-[#25D366]/40 transition-all duration-300"
+            className="w-full gap-2 bg-[#25D366] hover:bg-[#128C7E] text-white border-none shadow-lg shadow-[#25D366]/20 hover:shadow-[#25D366]/40 transition-all duration-300 mt-2"
           >
             <MessageCircle className="h-5 w-5" />
             Enviar Mensaje
