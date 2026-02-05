@@ -18,7 +18,7 @@ export default function WhatsAppForm() {
     e.preventDefault();
     if (!name.trim()) return;
 
-    const message = `Hola, soy ${name} estoy interesado en el Medio de Medios y me gustaría recibirlo todos los días`;
+    const message = `Hola, soy ${name} estoy interesado en el Medio de Medios (https://www.elmediodemedios.com/) y me gustaría recibirlo todos los días`;
     const whatsappUrl = `https://wa.me/525551075025?text=${encodeURIComponent(
       message,
     )}`;
