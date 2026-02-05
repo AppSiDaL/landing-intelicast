@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { MessageCircle } from "lucide-react";
-import { motion } from "framer-motion";
 import {
   Card,
   CardContent,
@@ -19,11 +18,10 @@ export default function WhatsAppForm() {
     e.preventDefault();
     if (!name.trim()) return;
 
-    const message = `Hola, soy ${name} estoy interesado en el servicio`;
+    const message = `Hola, soy ${name} estoy interesado en el Medio de Medios y me gustaría recibirlo todos los días`;
     const whatsappUrl = `https://wa.me/525551075025?text=${encodeURIComponent(
       message,
     )}`;
-    console.log(whatsappUrl);
 
     window.open(whatsappUrl, "_blank");
     setName("");
