@@ -351,7 +351,7 @@ export default function ServiceCatalog() {
                 variant="outline"
                 className="border-primary/50 text-primary"
               >
-                Catálogo de Servicios 2025
+                Catálogo de Servicios 2026
               </Badge>
             </motion.div>
             <motion.h2
@@ -557,7 +557,7 @@ export default function ServiceCatalog() {
               />
             </div>
             <p className="text-sm text-muted-foreground">
-              © 2025 Intelicast. Todos los derechos reservados.
+              © 2026 Intelicast. Todos los derechos reservados.
             </p>
           </div>
         </div>

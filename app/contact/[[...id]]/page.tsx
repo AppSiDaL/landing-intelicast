@@ -126,7 +126,7 @@ export default function ContactPage() {
               />
             </div>
             <p className="text-sm text-muted-foreground">
-              © 2025 Intelicast. Todos los derechos reservados.
+              © 2026 Intelicast. Todos los derechos reservados.
             </p>
           </div>
         </div>
