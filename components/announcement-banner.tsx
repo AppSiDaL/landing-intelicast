@@ -1,8 +1,8 @@
-'use client'
+"use client";
 
-import { Banner } from '@/components/ui/banner'
-import { Button } from '@/components/ui/button'
-import Image from 'next/image'
+import { Banner } from "@/components/ui/banner";
+import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 export default function AnnouncementBanner() {
   return (
@@ -28,20 +28,6 @@ export default function AnnouncementBanner() {
         <>
           <Button
             size="sm"
-            variant="default"
-            asChild
-            className="w-full sm:w-auto gap-2 shadow-sm"
-          >
-            <a
-              href="https://chat.whatsapp.com/EHU0cbRfVAj3FHWmBQem9O?mode=gi_t"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Suscribir
-            </a>
-          </Button>
-          <Button
-            size="sm"
             variant="outline"
             asChild
             className="w-full sm:w-auto gap-2 bg-white/90 text-slate-900 hover:bg-white"
@@ -54,9 +40,23 @@ export default function AnnouncementBanner() {
               Visitar Sitio
             </a>
           </Button>
+          <Button
+            size="sm"
+            variant="default"
+            asChild
+            className="w-full sm:w-auto gap-2 shadow-sm"
+          >
+            <a
+              href="https://chat.whatsapp.com/EHU0cbRfVAj3FHWmBQem9O?mode=gi_t"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Suscribir
+            </a>
+          </Button>
         </>
       }
       dismissible={false}
     />
-  )
+  );
 }
