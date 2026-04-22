@@ -66,7 +66,7 @@ export default function QRModal({ open, onOpenChange }: QRModalProps) {
             Código QR
           </DialogTitle>
           <DialogDescription>
-            Escanea este código para acceder al catálogo de servicios
+            Escanea la imagen para acceder al catálogo de servicios
           </DialogDescription>
         </DialogHeader>
 

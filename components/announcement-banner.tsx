@@ -25,20 +25,36 @@ export default function AnnouncementBanner() {
       title="Mantente Informado con El Medio de Medios"
       description="Análisis experto de medios políticos, financieros y tecnológicos. ¡Suscríbete ahora!"
       action={
-        <Button
-          size="sm"
-          variant="default"
-          asChild
-          className="gap-2 shrink-0 shadow-sm"
-        >
-          <a
-            href="https://www.elmediodemedios.com/"
-            target="_blank"
-            rel="noopener noreferrer"
+        <>
+          <Button
+            size="sm"
+            variant="default"
+            asChild
+            className="gap-2 shrink-0 shadow-sm"
           >
-            Visitar Sitio
-          </a>
-        </Button>
+            <a
+              href="https://chat.whatsapp.com/EHU0cbRfVAj3FHWmBQem9O?mode=gi_t"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Suscribir
+            </a>
+          </Button>
+          <Button
+            size="sm"
+            variant="outline"
+            asChild
+            className="gap-2 shrink-0 bg-white/90 text-slate-900 hover:bg-white"
+          >
+            <a
+              href="https://www.elmediodemedios.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Visitar Sitio
+            </a>
+          </Button>
+        </>
       }
       dismissible={false}
     />

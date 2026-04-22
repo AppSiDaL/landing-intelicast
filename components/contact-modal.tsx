@@ -17,7 +17,7 @@ import {
   Briefcase,
   Building2,
   ExternalLink,
-  MessageCircle, // Added for WhatsApp icon
+  MessageCircle,
 } from "lucide-react";
 import { useState } from "react";
 import { motion } from "framer-motion";
@@ -34,7 +34,7 @@ export default function ContactModal({
   const [copiedPhone, setCopiedPhone] = useState(false);
   const [copiedEmail1, setCopiedEmail1] = useState(false);
   const whatsappMessage =
-    "Hola Rodolfo, me interesa conocer más sobre los servicios de Intelicast y recibir información para una propuesta.";
+    "Hola Rodolfo, me interesa conocer más.";
 
   const copyToClipboard = async (text: string, type: "phone" | "email1") => {
     await navigator.clipboard.writeText(text);
