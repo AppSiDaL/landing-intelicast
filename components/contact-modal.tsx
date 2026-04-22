@@ -33,6 +33,8 @@ export default function ContactModal({
 }: ContactModalProps) {
   const [copiedPhone, setCopiedPhone] = useState(false);
   const [copiedEmail1, setCopiedEmail1] = useState(false);
+  const whatsappMessage =
+    "Hola Rodolfo, me interesa conocer más sobre los servicios de Intelicast y recibir información para una propuesta.";
 
   const copyToClipboard = async (text: string, type: "phone" | "email1") => {
     await navigator.clipboard.writeText(text);
@@ -192,7 +194,7 @@ export default function ContactModal({
               asChild
             >
               <a
-                href="https://wa.me/525551075025"
+                href={`https://wa.me/525551075025?text=${encodeURIComponent(whatsappMessage)}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >

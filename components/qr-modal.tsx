@@ -9,9 +9,9 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Download, Share2, Copy, Check, Sparkles } from "lucide-react";
-import { useRef, useState } from "react";
-import { QRCodeSVG } from "qrcode.react";
+import { useState } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 interface QRModalProps {
   open: boolean;
@@ -19,76 +19,29 @@ interface QRModalProps {
 }
 
 export default function QRModal({ open, onOpenChange }: QRModalProps) {
-  const qrRef = useRef<HTMLDivElement>(null);
   const [copied, setCopied] = useState(false);
   const currentUrl = typeof window !== "undefined" ? window.location.href : "";
 
   const downloadQR = () => {
-    const svg = qrRef.current?.querySelector("svg");
-    if (!svg) return;
-
-    const svgData = new XMLSerializer().serializeToString(svg);
-    const canvas = document.createElement("canvas");
-    const ctx = canvas.getContext("2d");
-    const img = new Image();
-
-    canvas.width = 1024;
-    canvas.height = 1024;
-
-    img.onload = () => {
-      if (!ctx) return;
-      ctx.fillStyle = "#ffffff";
-      ctx.fillRect(0, 0, 1024, 1024);
-      ctx.drawImage(img, 0, 0, 1024, 1024);
-
-      canvas.toBlob((blob) => {
-        if (!blob) return;
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement("a");
-        link.download = "intelicast-qr.png";
-        link.href = url;
-        link.click();
-        URL.revokeObjectURL(url);
-      });
-    };
-
-    img.src = "data:image/svg+xml;base64," + btoa(svgData);
+    const link = document.createElement("a");
+    link.href = "/qr-code.png";
+    link.download = "intelicast-qr.png";
+    link.click();
   };
 
   const shareQR = async () => {
-    const svg = qrRef.current?.querySelector("svg");
-    if (!svg) return;
-
     try {
-      const svgData = new XMLSerializer().serializeToString(svg);
-      const canvas = document.createElement("canvas");
-      const ctx = canvas.getContext("2d");
-      const img = new Image();
+      if (!navigator.share) return;
 
-      canvas.width = 1024;
-      canvas.height = 1024;
+      const response = await fetch("/qr-code.png");
+      const blob = await response.blob();
+      const file = new File([blob], "intelicast-qr.png", { type: "image/png" });
 
-      img.onload = async () => {
-        if (!ctx) return;
-        ctx.fillStyle = "#ffffff";
-        ctx.fillRect(0, 0, 1024, 1024);
-        ctx.drawImage(img, 0, 0, 1024, 1024);
-
-        canvas.toBlob(async (blob) => {
-          if (blob && navigator.share) {
-            const file = new File([blob], "intelicast-qr.png", {
-              type: "image/png",
-            });
-            await navigator.share({
-              title: "Intelicast - Catálogo de Servicios",
-              text: "Escanea este código QR para acceder a nuestro catálogo",
-              files: [file],
-            });
-          }
-        });
-      };
-
-      img.src = "data:image/svg+xml;base64," + btoa(svgData);
+      await navigator.share({
+        title: "Intelicast - Catálogo de Servicios",
+        text: "Escanea este código QR para acceder a nuestro catálogo",
+        files: [file],
+      });
     } catch (error) {
       console.error("Error sharing:", error);
     }
@@ -131,20 +84,14 @@ export default function QRModal({ open, onOpenChange }: QRModalProps) {
             transition={{ delay: 0.1, type: "spring", stiffness: 200 }}
           >
             <div className="p-6 bg-linear-to-br from-primary/5 to-accent/5 rounded-2xl shadow-xl border border-primary/20">
-              <div ref={qrRef} className="bg-white p-4 rounded-xl">
-                <QRCodeSVG
-                  value={currentUrl}
-                  size={256}
-                  level="H"
-                  includeMargin={true}
-                  imageSettings={{
-                    src: "/frame.png",
-                    x: undefined,
-                    y: undefined,
-                    height: 45,
-                    width: 50,
-                    excavate: true,
-                  }}
+              <div className="bg-white p-4 rounded-xl">
+                <Image
+                  src="/qr-code.png"
+                  alt="Código QR de Intelicast"
+                  width={256}
+                  height={256}
+                  className="h-64 w-64"
+                  priority
                 />
               </div>
             </div>
