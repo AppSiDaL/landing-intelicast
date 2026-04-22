@@ -3,7 +3,7 @@ import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '@/lib/utils'
 
 const bannerVariants = cva(
-  'flex items-center gap-3 px-4 py-3 md:px-6 md:py-4 border-b',
+  'flex flex-col items-start gap-2 px-4 py-3 md:px-6 md:py-4 border-b sm:flex-row sm:items-center sm:gap-3',
   {
     variants: {
       variant: {
@@ -62,7 +62,7 @@ const Banner = React.forwardRef<HTMLDivElement, BannerProps>(
         {icon && <div className="shrink-0 flex items-center">{icon}</div>}
 
         {/* Content */}
-        <div className="flex-1 min-w-0">
+        <div className="min-w-0 w-full sm:flex-1">
           {title && (
             <p className="font-semibold text-sm md:text-base leading-tight">
               {title}
@@ -76,7 +76,11 @@ const Banner = React.forwardRef<HTMLDivElement, BannerProps>(
         </div>
 
         {/* Action */}
-        {action && <div className="shrink-0 flex items-center gap-2">{action}</div>}
+        {action && (
+          <div className="w-full sm:w-auto shrink-0 flex flex-wrap items-center gap-2">
+            {action}
+          </div>
+        )}
 
         {/* Close Button */}
         {dismissible && onClose && (

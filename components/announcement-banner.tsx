@@ -19,7 +19,7 @@ export default function AnnouncementBanner() {
           alt="El Medio de Medios"
           width={200}
           height={50}
-          className="h-5 w-auto md:h-7"
+          className="h-6 w-auto md:h-7"
         />
       }
       title="Mantente Informado con El Medio de Medios"
@@ -30,7 +30,7 @@ export default function AnnouncementBanner() {
             size="sm"
             variant="default"
             asChild
-            className="gap-2 shrink-0 shadow-sm"
+            className="w-full sm:w-auto gap-2 shadow-sm"
           >
             <a
               href="https://chat.whatsapp.com/EHU0cbRfVAj3FHWmBQem9O?mode=gi_t"
@@ -44,7 +44,7 @@ export default function AnnouncementBanner() {
             size="sm"
             variant="outline"
             asChild
-            className="gap-2 shrink-0 bg-white/90 text-slate-900 hover:bg-white"
+            className="w-full sm:w-auto gap-2 bg-white/90 text-slate-900 hover:bg-white"
           >
             <a
               href="https://www.elmediodemedios.com/"
