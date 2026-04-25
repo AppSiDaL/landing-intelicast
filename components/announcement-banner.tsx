@@ -2,6 +2,7 @@
 
 import { Banner } from "@/components/ui/banner";
 import { Button } from "@/components/ui/button";
+import { MessageCircle } from "lucide-react";
 import Image from "next/image";
 
 export default function AnnouncementBanner() {
@@ -33,7 +34,7 @@ export default function AnnouncementBanner() {
             className="w-full sm:w-auto gap-2 bg-white/90 text-slate-900 hover:bg-white"
           >
             <a
-              href="http://www.elmediodemedios.com:3000/"
+              href="https://www.elmediodemedios.com/"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -44,14 +45,15 @@ export default function AnnouncementBanner() {
             size="sm"
             variant="default"
             asChild
-            className="w-full sm:w-auto gap-2 shadow-sm"
+            className="w-full sm:w-auto gap-2 bg-[#25D366] text-white shadow-sm hover:bg-[#20bd5a]"
           >
             <a
               href="https://chat.whatsapp.com/EHU0cbRfVAj3FHWmBQem9O?mode=gi_t"
               target="_blank"
               rel="noopener noreferrer"
             >
-              Suscribir
+              <MessageCircle className="h-4 w-4" />
+              Unete al grupo
             </a>
           </Button>
         </>
