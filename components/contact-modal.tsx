@@ -41,7 +41,7 @@ const contacts = {
   SCM: {
     name: "Sylvi Cruz Monroy",
     title: "Directora General",
-    company: "Oblekco",
+    company: "Intelite",
     phone: "525524966826",
     phoneDisplay: "+52 55 2496 6826",
     email: "sylvi.c@oblekco.com",
