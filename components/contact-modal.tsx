@@ -25,16 +25,43 @@ import { motion } from "framer-motion";
 interface ContactModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  contactId?: string;
 }
+
+const contacts = {
+  RSM: {
+    name: "Rodolfo Sandoval Monroy",
+    title: "Presidente",
+    company: "Intelite",
+    phone: "525551075025",
+    phoneDisplay: "+52 55 5107 5025",
+    email: "rsm@oblekco.com",
+    whatsappMessage: "Hola Rodolfo, me interesa conocer más.",
+  },
+  SCM: {
+    name: "Sylvi Cruz Monroy",
+    title: "Directora General",
+    company: "Oblekco",
+    phone: "525524966826",
+    phoneDisplay: "+52 55 2496 6826",
+    email: "sylvi.c@oblekco.com",
+    whatsappMessage: "Hola Sylvi, me interesa conocer más.",
+  },
+} as const;
 
 export default function ContactModal({
   open,
   onOpenChange,
+  contactId,
 }: ContactModalProps) {
   const [copiedPhone, setCopiedPhone] = useState(false);
   const [copiedEmail1, setCopiedEmail1] = useState(false);
-  const whatsappMessage =
-    "Hola Rodolfo, me interesa conocer más.";
+
+  const normalizedContactId = contactId?.toUpperCase() as
+    | keyof typeof contacts
+    | undefined;
+  const contact =
+    (normalizedContactId && contacts[normalizedContactId]) || contacts.RSM;
 
   const copyToClipboard = async (text: string, type: "phone" | "email1") => {
     await navigator.clipboard.writeText(text);
@@ -92,15 +119,15 @@ export default function ContactModal({
               </div>
               <div className="flex-1 space-y-1 sm:space-y-2 min-w-0">
                 <h3 className="font-bold text-lg sm:text-xl text-foreground wrap-break-words">
-                  Rodolfo Sandoval Monroy
+                  {contact.name}
                 </h3>
                 <div className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground">
                   <Briefcase className="h-3.5 w-3.5 sm:h-4 sm:w-4 shrink-0" />
-                  <span>Presidente</span>
+                  <span>{contact.title}</span>
                 </div>
                 <div className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground">
                   <Building2 className="h-3.5 w-3.5 sm:h-4 sm:w-4 shrink-0" />
-                  <span>Intelite</span>
+                  <span>{contact.company}</span>
                 </div>
               </div>
             </div>
@@ -119,19 +146,19 @@ export default function ContactModal({
             </div>
             <div className="flex items-center gap-2">
               <motion.a
-                href="tel:+525551075025"
+                href={`tel:+${contact.phone}`}
                 className="flex-1 p-3 sm:p-4 rounded-lg bg-muted hover:bg-muted/70 transition-colors border border-border/50"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
                 <p className="text-base sm:text-lg font-mono text-primary font-semibold">
-                  +52 55 5107 5025
+                  {contact.phoneDisplay}
                 </p>
               </motion.a>
               <Button
                 size="icon"
                 variant="outline"
-                onClick={() => copyToClipboard("+525551075025", "phone")}
+                onClick={() => copyToClipboard(`+${contact.phone}`, "phone")}
                 className="h-11 w-11 sm:h-12 sm:w-12 shrink-0"
               >
                 {copiedPhone ? (
@@ -157,14 +184,14 @@ export default function ContactModal({
 
             <div className="flex items-center gap-2">
               <motion.a
-                href="mailto:rsm@oblekco.com"
+                href={`mailto:${contact.email}`}
                 className="flex-1 p-3 sm:p-4 rounded-lg bg-muted hover:bg-muted/70 transition-colors border border-border/50 group min-w-0"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
                 <div className="flex items-center justify-between gap-2">
                   <p className="text-xs sm:text-sm font-mono text-primary break-all">
-                    rsm@oblekco.com
+                    {contact.email}
                   </p>
                   <ExternalLink className="h-4 w-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity shrink-0" />
                 </div>
@@ -172,7 +199,7 @@ export default function ContactModal({
               <Button
                 size="icon"
                 variant="outline"
-                onClick={() => copyToClipboard("rsm@oblekco.com", "email1")}
+                onClick={() => copyToClipboard(contact.email, "email1")}
                 className="h-11 w-11 sm:h-12 sm:w-12 shrink-0"
               >
                 {copiedEmail1 ? (
@@ -194,7 +221,7 @@ export default function ContactModal({
               asChild
             >
               <a
-                href={`https://wa.me/525551075025?text=${encodeURIComponent(whatsappMessage)}`}
+                href={`https://wa.me/${contact.phone}?text=${encodeURIComponent(contact.whatsappMessage)}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -206,7 +233,7 @@ export default function ContactModal({
               className="flex-1 gap-2 h-11 sm:h-12 text-sm sm:text-base"
               asChild
             >
-              <a href="tel:+525551075025">
+              <a href={`tel:+${contact.phone}`}>
                 <Phone className="h-4 w-4 sm:h-5 sm:w-5" />
                 Llamar Ahora
               </a>
@@ -216,7 +243,7 @@ export default function ContactModal({
               variant="outline"
               asChild
             >
-              <a href="mailto:rsm@oblekco.com">
+              <a href={`mailto:${contact.email}`}>
                 <Mail className="h-4 w-4 sm:h-5 sm:w-5" />
                 Enviar Email
               </a>

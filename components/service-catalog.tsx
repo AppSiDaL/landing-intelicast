@@ -33,6 +33,7 @@ import ContactModal from "./contact-modal";
 import QRModal from "./qr-modal";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+import { useSearchParams } from "next/navigation";
 
 const services = [
   {
@@ -115,6 +116,9 @@ export default function ServiceCatalog() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showContact, setShowContact] = useState(false);
   const [showQR, setShowQR] = useState(false);
+  const searchParams = useSearchParams();
+  const contactId =
+    searchParams.get("contact") ?? searchParams.get("id") ?? undefined;
 
   // Variantes de animación
   const fadeInUp = {
@@ -564,7 +568,11 @@ export default function ServiceCatalog() {
       </footer>
 
       {/* Modals */}
-      <ContactModal open={showContact} onOpenChange={setShowContact} />
+      <ContactModal
+        open={showContact}
+        onOpenChange={setShowContact}
+        contactId={contactId}
+      />
       <QRModal open={showQR} onOpenChange={setShowQR} />
     </div>
   );
