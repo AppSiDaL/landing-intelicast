@@ -34,7 +34,7 @@ export default function AnnouncementBanner() {
             className="w-full sm:w-auto gap-2 bg-white/90 text-slate-900 hover:bg-white"
           >
             <a
-              href="https://www.elmediodemedios.com/"
+              href="http://www.elmediodemedios.com:3000/"
               target="_blank"
               rel="noopener noreferrer"
             >
