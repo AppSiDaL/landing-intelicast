@@ -64,7 +64,7 @@ function buildButtonsPayload(chatId: string) {
       {
         type: "url",
         buttonId: "web_btn",
-        buttonText: "🌐 Sitio Web",
+        buttonText: "🌐 El Medio de Medios",
         url: "https://www.elmediodemedios.com/",
       },
     ],
