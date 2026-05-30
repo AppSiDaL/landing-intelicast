@@ -36,7 +36,7 @@ const contacts = {
     phone: "525551075025",
     phoneDisplay: "+52 55 5107 5025",
     email: "rsm@oblekco.com",
-    whatsappMessage: "Hola Rodolfo, me interesa conocer más.",
+    whatsappMessage: "Intelite",
   },
   SCM: {
     name: "Sylvi Cruz Monroy",
@@ -45,7 +45,7 @@ const contacts = {
     phone: "525524966826",
     phoneDisplay: "+52 55 2496 6826",
     email: "sylvi.c@oblekco.com",
-    whatsappMessage: "Hola Sylvi, me interesa conocer más.",
+    whatsappMessage: "Intelite",
   },
 } as const;
 

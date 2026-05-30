@@ -3,7 +3,7 @@ import {
   CONTACTS,
   isContactKey,
   isConfigured,
-  alreadyGreeted,
+  matchesKeyword,
   sendButtons,
 } from "@/lib/greenapi";
 
@@ -16,7 +16,8 @@ export const dynamic = "force-dynamic";
  *   https://<domain>/api/greenapi/webhook/<rsm|scm|gdn>
  * and set webhookUrlToken = GREENAPI_WEBHOOK_SECRET (sent as Bearer token).
  *
- * On the first inbound message from a contact, replies with interactive buttons.
+ * Whenever an inbound message contains the keyword "Intelite", replies with
+ * interactive buttons.
  */
 export async function POST(
   req: NextRequest,
@@ -54,12 +55,9 @@ export async function POST(
   }
 
   try {
-    const chatId = extractInboundChatId(body);
-    if (
-      chatId &&
-      !(await alreadyGreeted(config.idInstance, config.apiToken, chatId))
-    ) {
-      await sendButtons(config.idInstance, config.apiToken, chatId);
+    const inbound = extractInbound(body);
+    if (inbound && matchesKeyword(inbound.text)) {
+      await sendButtons(config.idInstance, config.apiToken, inbound.chatId);
     }
   } catch (err) {
     console.error("[greenapi] error handling message", err);
@@ -69,19 +67,33 @@ export async function POST(
 }
 
 /**
- * Return the sender chatId for an inbound 1:1 message, or null otherwise.
- * Green API delivers an incoming message as:
+ * Return the sender chatId + message text for an inbound 1:1 text message, or
+ * null otherwise. Green API delivers an incoming message as:
  *   { typeWebhook: "incomingMessageReceived",
- *     senderData: { chatId: "5215545641120@c.us", ... }, ... }
+ *     senderData: { chatId: "5215545641120@c.us", ... },
+ *     messageData: { typeMessage: "textMessage",
+ *                    textMessageData: { textMessage: "Intelite" } } }
+ * Plain text can also arrive as an extendedTextMessage.
  */
-function extractInboundChatId(body: unknown): string | null {
+function extractInbound(body: unknown): { chatId: string; text: string } | null {
   const b = body as {
     typeWebhook?: string;
     senderData?: { chatId?: string };
+    messageData?: {
+      textMessageData?: { textMessage?: string };
+      extendedTextMessageData?: { text?: string };
+    };
   };
   if (b?.typeWebhook !== "incomingMessageReceived") return null;
+
   const chatId = b.senderData?.chatId;
   if (typeof chatId !== "string") return null;
   if (chatId.endsWith("@g.us")) return null; // ignore group chats
-  return chatId;
+
+  const text =
+    b.messageData?.textMessageData?.textMessage ??
+    b.messageData?.extendedTextMessageData?.text ??
+    "";
+
+  return { chatId, text };
 }

@@ -40,10 +40,7 @@ export default function WhatsAppForm({ inviterId }: { inviterId?: string }) {
     e.preventDefault();
     if (!name.trim()) return;
 
-    let message = `Hola, soy ${name},`;
-    if (position.trim()) message += ` ${position.trim()}`;
-    if (company.trim()) message += ` de ${company.trim()}`;
-    message += `, estoy interesad@ en recibir todos los días el Medio de Medios por cortesía de ${inviter.name} (https://www.elmediodemedios.com/publicaciones/agenda-nacional)`;
+    const message = "Intelite";
 
     const whatsappUrl = `https://wa.me/${inviter.number}?text=${encodeURIComponent(
       message,

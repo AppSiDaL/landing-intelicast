@@ -53,9 +53,7 @@ function instanceUrl(idInstance: string, apiToken: string, method: string) {
 function buildButtonsPayload(chatId: string) {
   return {
     chatId,
-    header: "Intelite",
-    body: "👋 Gracias por comunicarte con Intelite\n\nSelecciona una opción:",
-    footer: "Estamos para ayudarte",
+    body: "Es un gusto estar a tus órdenes",
     buttons: [
       {
         type: "url",
@@ -96,35 +94,14 @@ export async function sendButtons(
   return true;
 }
 
-/**
- * Dedup without any external database: ask Green API whether this chat already
- * has an outgoing message (`type === "outgoing"`). If so, we already greeted
- * this contact and skip. In this funnel the visitor always messages first, so
- * the first outgoing is our own greeting. On API error we return false (prefer
- * greeting over going silent).
- */
-export async function alreadyGreeted(
-  idInstance: string,
-  apiToken: string,
-  chatId: string,
-): Promise<boolean> {
-  try {
-    const res = await fetch(
-      instanceUrl(idInstance, apiToken, "getChatHistory"),
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ chatId, count: 20 }),
-      },
-    );
-    if (!res.ok) {
-      console.error(`[greenapi] history check failed ${res.status}`);
-      return false;
-    }
-    const data = (await res.json()) as { type?: string }[];
-    return Array.isArray(data) && data.some((m) => m.type === "outgoing");
-  } catch (err) {
-    console.error("[greenapi] history check error", err);
-    return false;
-  }
+/** Keyword that triggers the auto-reply (accent/case-insensitive substring). */
+const TRIGGER_KEYWORD = "intelite";
+
+/** True if the incoming message text contains the trigger keyword. */
+export function matchesKeyword(text: string): boolean {
+  const normalized = text
+    .normalize("NFD")
+    .replace(/\p{Diacritic}/gu, "")
+    .toLowerCase();
+  return normalized.includes(TRIGGER_KEYWORD);
 }
