@@ -48,7 +48,7 @@ export default function AnnouncementBanner() {
             className="w-full sm:w-auto gap-2 bg-[#25D366] text-white shadow-sm hover:bg-[#20bd5a]"
           >
             <a
-              href="https://chat.whatsapp.com/EHU0cbRfVAj3FHWmBQem9O?mode=gi_t"
+              href="https://chat.whatsapp.com/EZGhI73YGUkE1BE6mECtAJ?s=sw&p=i&mlu=4"
               target="_blank"
               rel="noopener noreferrer"
             >
